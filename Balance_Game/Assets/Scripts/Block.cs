@@ -21,7 +21,6 @@ public class Block : MonoBehaviour
     {
         if (moving) 
         {
-
             if(direction == Slot.Direction.Up)
             {
                 transform.Translate(Vector3.down * settings.blockSpeed * Time.deltaTime);

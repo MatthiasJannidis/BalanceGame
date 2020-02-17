@@ -236,7 +236,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.4009434, g: 0.6339098, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -972,7 +972,9 @@ MonoBehaviour:
   - {fileID: 2095687547}
   upSelection: {fileID: 1987374349}
   downSelection: {fileID: 1987374351}
-  blockPrefab: {fileID: 4375947203174434537, guid: 9989005f974eeb045b5db8c6bcbc9ae4,
+  upBlockPrefab: {fileID: 4375947203174434537, guid: 9989005f974eeb045b5db8c6bcbc9ae4,
+    type: 3}
+  downBlockPrefab: {fileID: 6736213569446100750, guid: e3b33ec5cc3647c408818a8b8ddc3a4b,
     type: 3}
   settings: {fileID: 11400000, guid: 99fed084a0e75e44baa5422da41ae816, type: 2}
 --- !u!1 &2095687546

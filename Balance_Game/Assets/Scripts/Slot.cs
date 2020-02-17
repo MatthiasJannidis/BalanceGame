@@ -8,7 +8,8 @@ public class Slot : MonoBehaviour
     int blocksUp = 0;
     int blocksDown = 0;
     float spriteHalfHeight = .0f;
-    float blockHalfHeight = .0f;
+    float upBlockHalfHeight = .0f;
+    float downBlockHalfHeight = .0f;
 
     public enum Direction : int
     {
@@ -19,16 +20,17 @@ public class Slot : MonoBehaviour
     private void Start()
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        Bounds spriteBounds = spriteRenderer.sprite.bounds;
-        spriteHalfHeight = spriteBounds.size.y;
+        spriteHalfHeight = spriteRenderer.sprite.GetBoundsHalfHeight();
 
-        blockHalfHeight = settings.blockSprite.bounds.size.y*.5f;
+        upBlockHalfHeight = settings.upBlockSprite.GetBoundsHalfHeight();
+        downBlockHalfHeight = settings.downBlockSprite.GetBoundsHalfHeight();
     }
 
     void Update()
     {
-        float blockPush = (float)(blocksDown - blocksUp);
-        transform.Translate(Vector3.up * blockPush * settings.slotSpeed * Time.deltaTime);
+        Vector3 up = Vector3.up * blocksDown * settings.downBlockWeight;
+        Vector3 down = Vector3.down * blocksUp * settings.upBlockWeight; 
+        transform.Translate((up + down) * settings.slotSpeed * Time.deltaTime);
 
         //todo : communicate this to a game controller-like object
         if(transform.position.y > settings.slotBoundaries) 
@@ -61,7 +63,7 @@ public class Slot : MonoBehaviour
     { 
         get 
         {
-            return (blocksUp+1)*blockHalfHeight + spriteHalfHeight*.5f; 
+            return (float)blocksUp*upBlockHalfHeight + spriteHalfHeight; 
         } 
     }
 
@@ -75,7 +77,7 @@ public class Slot : MonoBehaviour
     { 
         get 
         {
-            return -((blocksDown) * blockHalfHeight + spriteHalfHeight);
+            return -((float)blocksDown * downBlockHalfHeight + spriteHalfHeight);
         } 
     }
 

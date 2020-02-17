@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class PlayerSelection : MonoBehaviour
 {
-    int selection = 1;
-    [SerializeField] GameObject[] selectionOutlines;
-    [SerializeField] Slot[] slots;
+    [SerializeField] GameObject[] selectionOutlines = default;
+    [SerializeField] Slot[] slots = default;
     [SerializeField] KeyCode leftKey;
     [SerializeField] KeyCode rightKey;
     [SerializeField] Slot.Direction direction;
-    public int CurrentSelection { get { return selection; } }
+    public int CurrentSelection { get; private set; } = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -23,14 +22,14 @@ public class PlayerSelection : MonoBehaviour
     {
         if (Input.GetKeyUp(leftKey)) 
         {
-            selection--;
-            selection = Mathf.Max(selection, 0);
+            CurrentSelection--;
+            CurrentSelection = Mathf.Max(CurrentSelection, 0);
             OnSelect();
         }
         if (Input.GetKeyUp(rightKey)) 
         {
-            selection++;
-            selection = Mathf.Min(selection, selectionOutlines.Length-1);
+            CurrentSelection++;
+            CurrentSelection = Mathf.Min(CurrentSelection, selectionOutlines.Length-1);
             OnSelect();
         }
 
@@ -52,6 +51,6 @@ public class PlayerSelection : MonoBehaviour
         {
             selectionOutlines[i].SetActive(false);
         }
-        selectionOutlines[selection].SetActive(true);
+        selectionOutlines[CurrentSelection].SetActive(true);
     }
 }

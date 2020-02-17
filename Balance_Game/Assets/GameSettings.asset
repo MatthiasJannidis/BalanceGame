@@ -15,7 +15,11 @@ MonoBehaviour:
   slotSpeed: 0.1
   slotSpawnTimerSeconds: 1
   slotBoundaries: 1
-  initialPlayTimer: 2
+  initialUpTimer: 1.8
+  initialDownTimer: 2
   initialBlockHeight: 1.2
   blockSpeed: 1
-  blockSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  upBlockSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  upBlockWeight: 0.8
+  downBlockSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  downBlockWeight: 1.2

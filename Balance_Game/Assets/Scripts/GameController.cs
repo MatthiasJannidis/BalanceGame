@@ -10,40 +10,43 @@ public class GameController : MonoBehaviour
     [SerializeField] PlayerSelection downSelection;
 
     [Header("Prefabs")]
-    [SerializeField] GameObject blockPrefab;
+    [SerializeField] GameObject upBlockPrefab;
+    [SerializeField] GameObject downBlockPrefab;
 
     [Header("Misc")]
     [SerializeField] GameSettings settings;
 
     Slot.Direction currentDirection = Slot.Direction.Up;
-    Timer playTimer = null;
+    Timer upTimer = null;
+    Timer downTimer = null;
 
     void Start()
     {
-        playTimer = new Timer(settings.initialPlayTimer);
+        upTimer = new Timer(settings.initialUpTimer);
+        downTimer = new Timer(settings.initialDownTimer);
     }
 
     void Update()
     {
-        playTimer.tick();
-        if (playTimer.isDone) 
+        upTimer.tick();
+        if (upTimer.isDone) 
         {
-            {
-                var currentSlot = slots[upSelection.CurrentSelection];
-                Vector3 slotPos = currentSlot.transform.position;
-                var block = Instantiate(blockPrefab, new Vector3(slotPos.x, settings.initialBlockHeight, slotPos.z), Quaternion.identity);
-                block.GetComponent<Block>().Init(currentSlot, settings, Slot.Direction.Up);
+            var currentSlot = slots[upSelection.CurrentSelection];
+            Vector3 slotPos = currentSlot.transform.position;
+            var block = Instantiate(upBlockPrefab, new Vector3(slotPos.x, settings.initialBlockHeight, slotPos.z), Quaternion.identity);
+            block.GetComponent<Block>().Init(currentSlot, settings, Slot.Direction.Up);           
+            upTimer.reset(settings.initialUpTimer);
+        }
 
-            }
+        downTimer.tick();
 
-            {
-                var currentSlot = slots[downSelection.CurrentSelection];
-                Vector3 slotPos = currentSlot.transform.position;
-                var block = Instantiate(blockPrefab, new Vector3(slotPos.x, -settings.initialBlockHeight, slotPos.z), Quaternion.Euler(.0f, .0f, 180.0f));
-                block.GetComponent<Block>().Init(currentSlot, settings, Slot.Direction.Down);
-            }
-
-            playTimer.reset(settings.initialPlayTimer);
+        if (downTimer.isDone) 
+        {
+            var currentSlot = slots[downSelection.CurrentSelection];
+            Vector3 slotPos = currentSlot.transform.position;
+            var block = Instantiate(downBlockPrefab, new Vector3(slotPos.x, -settings.initialBlockHeight, slotPos.z), Quaternion.Euler(.0f, .0f, 180.0f));
+            block.GetComponent<Block>().Init(currentSlot, settings, Slot.Direction.Down);
+            downTimer.reset(settings.initialDownTimer);
         }
     }
 }
