@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1ad95b4201696b4da38980ea1896b51, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  slotSpeed: 0.1
-  quickArrowPlaceTimer: 1
-  strongArrowPlaceTimer: 1
-  strongArrowGoalY: 2
-  weakArrowPointGoal: 3
+  slotSpeed: 0.07
+  quickArrowPlaceTimer: 0.9
+  strongArrowPlaceTimer: 1.5
+  strongArrowGoalY: 5
+  weakArrowPointGoal: 4
   weakArrowFirstPointY: -0.4
-  weakArrowSecondPointY: -0.6
-  weakArrowThirdPointY: -0.8
-  quickArrowWeight: 1
-  strongArrowWeight: 1
+  weakArrowSecondPointY: -1
+  weakArrowThirdPointY: -2
+  quickArrowWeight: 0.6
+  strongArrowWeight: 1.3

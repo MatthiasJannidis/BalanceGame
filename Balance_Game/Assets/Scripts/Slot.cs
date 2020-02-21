@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Slot : MonoBehaviour
 {
     [SerializeField] GameSettings settings;
     int quickArrows = 0;
     int strongArrows = 0;
+
+    [SerializeField] ArrowIndicator upIndicator;
+    [SerializeField] ArrowIndicator downIndicator;
 
     public float MinY { get; private set; } = .0f;
 
@@ -17,20 +21,25 @@ public class Slot : MonoBehaviour
     }
     void Update()
     {
-        Vector3 up = Vector3.up * strongArrows * settings.strongArrowWeight;
-        Vector3 down = Vector3.down * quickArrows * settings.quickArrowWeight; 
+        Vector3 down = Vector3.down * strongArrows * settings.strongArrowWeight;
+        Vector3 up = Vector3.up * quickArrows * settings.quickArrowWeight; 
         transform.Translate((up + down) * settings.slotSpeed * Time.deltaTime);
         MinY = Mathf.Min(transform.position.y, MinY);
+
+        float y = transform.position.y;
+        transform.position = new Vector3(transform.position.x, Mathf.Clamp(y, -Camera.main.orthographicSize, Camera.main.orthographicSize), transform.position.z);
     }
 
     public void AddQuickArrow() 
     {
         quickArrows++;
+        downIndicator.AddIndicator();
     }
 
     public void AddStrongArrow() 
     {
         strongArrows++;
+        upIndicator.AddIndicator();
     }    
 
     public int GetSlotPoints 
