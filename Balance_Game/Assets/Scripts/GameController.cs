@@ -6,44 +6,66 @@ public class GameController : MonoBehaviour
 {
     [Header("Scripts")]
     [SerializeField] Slot[] slots;
-    [SerializeField] PlayerSelection upSelection;
-    [SerializeField] PlayerSelection downSelection;
-
-    [Header("Prefabs")]
-    [SerializeField] GameObject blockPrefab;
+    [SerializeField] PlayerSelection quickSelection;
+    [SerializeField] PlayerSelection strongSelection;
 
     [Header("Misc")]
     [SerializeField] GameSettings settings;
 
-    Slot.Direction currentDirection = Slot.Direction.Up;
-    Timer playTimer = null;
+    Timer quickTimer = null;
+    Timer strongTimer = null;
+    int[] lastSlotPoints;
+    int quickPoints = 0;
 
     void Start()
     {
-        playTimer = new Timer(settings.initialPlayTimer);
+        lastSlotPoints = new int[slots.Length];
+        for(int i = 0; i < lastSlotPoints.Length; i++) 
+        {
+            lastSlotPoints[i] = 0;
+        }
+        quickTimer = new Timer(settings.quickArrowPlaceTimer);
+        strongTimer = new Timer(settings.strongArrowPlaceTimer);
     }
 
     void Update()
     {
-        playTimer.tick();
-        if (playTimer.isDone) 
+        quickTimer.tick();
+        if (quickTimer.isDone) 
         {
-            {
-                var currentSlot = slots[upSelection.CurrentSelection];
-                Vector3 slotPos = currentSlot.transform.position;
-                var block = Instantiate(blockPrefab, new Vector3(slotPos.x, settings.initialBlockHeight, slotPos.z), Quaternion.identity);
-                block.GetComponent<Block>().Init(currentSlot, settings, Slot.Direction.Up);
+            var currentSlot = slots[quickSelection.CurrentSelection];
+            currentSlot.AddQuickArrow();
+            quickTimer.reset(settings.quickArrowPlaceTimer);
+        }
 
+        strongTimer.tick();
+
+        if (strongTimer.isDone) 
+        {
+            var currentSlot = slots[strongSelection.CurrentSelection];
+            currentSlot.AddStrongArrow();
+            strongTimer.reset(settings.strongArrowPlaceTimer);
+        }
+
+        for(int i = 0; i < slots.Length; i++) 
+        {
+            //todo : communicate this to a game controller-like object
+            if (slots[i].transform.position.y > settings.strongArrowGoalY)
+            {
+                Debug.Log("STRONG PLAYER WON");
             }
 
-            {
-                var currentSlot = slots[downSelection.CurrentSelection];
-                Vector3 slotPos = currentSlot.transform.position;
-                var block = Instantiate(blockPrefab, new Vector3(slotPos.x, -settings.initialBlockHeight, slotPos.z), Quaternion.Euler(.0f, .0f, 180.0f));
-                block.GetComponent<Block>().Init(currentSlot, settings, Slot.Direction.Down);
-            }
+            int slotPoints = slots[i].GetSlotPoints;
 
-            playTimer.reset(settings.initialPlayTimer);
+            if (slotPoints > lastSlotPoints[i]) 
+            {
+                quickPoints += slotPoints - lastSlotPoints[i];
+                if(quickPoints >= settings.weakArrowPointGoal)
+                {
+                    Debug.Log("QUICK PLAYER WON");
+                }
+            }
+            lastSlotPoints[i] = slotPoints;
         }
     }
 }

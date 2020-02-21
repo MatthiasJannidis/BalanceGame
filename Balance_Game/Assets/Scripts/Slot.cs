@@ -5,79 +5,42 @@ using UnityEngine;
 public class Slot : MonoBehaviour
 {
     [SerializeField] GameSettings settings;
-    int blocksUp = 0;
-    int blocksDown = 0;
-    float spriteHalfHeight = .0f;
-    float blockHalfHeight = .0f;
+    int quickArrows = 0;
+    int strongArrows = 0;
+
+    public float MinY { get; private set; } = .0f;
 
     public enum Direction : int
     {
         Up = 1,
         Down = -1
     }
-
-    private void Start()
-    {
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        Bounds spriteBounds = spriteRenderer.sprite.bounds;
-        spriteHalfHeight = spriteBounds.size.y;
-
-        blockHalfHeight = settings.blockSprite.bounds.size.y*.5f;
-    }
-
     void Update()
     {
-        float blockPush = (float)(blocksDown - blocksUp);
-        transform.Translate(Vector3.up * blockPush * settings.slotSpeed * Time.deltaTime);
-
-        //todo : communicate this to a game controller-like object
-        if(transform.position.y > settings.slotBoundaries) 
-        {
-            Debug.Log("UP PLAYER WON");
-        }
-        if(transform.position.y < -settings.slotBoundaries) 
-        {
-            Debug.Log("DOWN PLAYER WON");
-        }
+        Vector3 up = Vector3.up * strongArrows * settings.strongArrowWeight;
+        Vector3 down = Vector3.down * quickArrows * settings.quickArrowWeight; 
+        transform.Translate((up + down) * settings.slotSpeed * Time.deltaTime);
+        MinY = Mathf.Min(transform.position.y, MinY);
     }
 
-    public void AddUpBlock() 
+    public void AddQuickArrow() 
     {
-        blocksUp++;
+        quickArrows++;
     }
 
-    public void AddDownBlock() 
+    public void AddStrongArrow() 
     {
-        blocksDown++;
-    }
+        strongArrows++;
+    }    
 
-    public bool InRangeUp(float givenY) 
-    {
-        float y = (transform.worldToLocalMatrix * new Vector4(transform.position.x, givenY, transform.position.z, 1.0f)).y;
-        return y <= NextBlockYUp;
-    }
-
-    public float NextBlockYUp 
+    public int GetSlotPoints 
     { 
-        get 
+        get
         {
-            return (blocksUp+1)*blockHalfHeight + spriteHalfHeight*.5f; 
+            if (MinY <= settings.weakArrowThirdPointY) return 3;
+            if (MinY <= settings.weakArrowSecondPointY) return 2;
+            if (MinY <= settings.weakArrowFirstPointY) return 1;
+            return 0; 
         } 
     }
-
-    public bool InRangeDown(float givenY)
-    {
-        float y = (transform.worldToLocalMatrix * new Vector4(transform.position.x, givenY, transform.position.z, 1.0f)).y;
-        return y >= NextBlockYDown;
-    }
-
-    public float NextBlockYDown
-    { 
-        get 
-        {
-            return -((blocksDown) * blockHalfHeight + spriteHalfHeight);
-        } 
-    }
-
-    
 }
