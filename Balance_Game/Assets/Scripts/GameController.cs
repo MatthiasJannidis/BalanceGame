@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -11,6 +12,11 @@ public class GameController : MonoBehaviour
 
     [Header("Misc")]
     [SerializeField] GameSettings settings;
+
+
+    [Header("UI")]
+    [SerializeField] Image strongTimerImage;
+    [SerializeField] Image fastTimerImage;
 
     Timer quickTimer = null;
     Timer strongTimer = null;
@@ -31,15 +37,16 @@ public class GameController : MonoBehaviour
     void Update()
     {
         quickTimer.tick();
+        fastTimerImage.fillAmount = (quickTimer.PassedTime / quickTimer.GetTimer);
         if (quickTimer.isDone) 
         {
             var currentSlot = slots[quickSelection.CurrentSelection];
             currentSlot.AddQuickArrow();
             quickTimer.reset(settings.quickArrowPlaceTimer);
         }
-
+        
         strongTimer.tick();
-
+        strongTimerImage.fillAmount = (strongTimer.PassedTime/strongTimer.GetTimer);
         if (strongTimer.isDone) 
         {
             var currentSlot = slots[strongSelection.CurrentSelection];

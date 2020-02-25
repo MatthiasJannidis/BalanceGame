@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: GameSettings
   m_EditorClassIdentifier: 
   slotSpeed: 0.07
-  quickArrowPlaceTimer: 0.9
-  strongArrowPlaceTimer: 1.5
+  quickArrowPlaceTimer: 1.2
+  strongArrowPlaceTimer: 2
   strongArrowGoalY: 5
   weakArrowPointGoal: 4
   weakArrowFirstPointY: -0.4

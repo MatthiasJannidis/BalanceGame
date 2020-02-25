@@ -7,6 +7,7 @@ public class Timer
     float timer = .0f;
     float passedTime = .0f;
     public float PassedTime { get { return passedTime; } }
+    public float GetTimer { get { return timer; } }
     public bool isDone { get { return passedTime > timer; } }
 
     public Timer(float timer) { this.timer = timer; }

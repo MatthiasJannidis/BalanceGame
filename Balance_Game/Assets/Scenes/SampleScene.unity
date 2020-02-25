@@ -377,6 +377,79 @@ Transform:
   m_Father: {fileID: 1873244521}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &624490236
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 624490237}
+  - component: {fileID: 624490239}
+  - component: {fileID: 624490238}
+  m_Layer: 5
+  m_Name: FastTimer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &624490237
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 624490236}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1371132205}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 7.52, y: -2}
+  m_SizeDelta: {x: 1.212, y: 1.2}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &624490238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 624490236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.2627451, g: 0.97647065, b: 0.9686275, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 2
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &624490239
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 624490236}
+  m_CullTransparentMesh: 0
 --- !u!1 &888458012
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,7 +462,7 @@ GameObject:
   - component: {fileID: 888458015}
   - component: {fileID: 888458014}
   m_Layer: 5
-  m_Name: Image
+  m_Name: StrongTimer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -411,7 +484,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 7.52, y: 2.053}
+  m_AnchoredPosition: {x: 7.52, y: 2}
   m_SizeDelta: {x: 1.212, y: 1.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &888458014
@@ -427,19 +500,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.97647065, g: 0.3137255, b: 0.9960785, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &888458015
@@ -863,6 +936,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 888458013}
+  - {fileID: 624490237}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1580,8 +1654,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 11
   m_Positions:
-  - {x: -10, y: -5, z: 0}
-  - {x: 10, y: -5, z: 0}
+  - {x: -10, y: 0, z: 0}
+  - {x: 10, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.1
@@ -1992,9 +2066,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectionOutlines:
-  - {fileID: 1259218830}
-  - {fileID: 1919715718}
-  - {fileID: 1429491861}
+  - {fileID: 48701264}
+  - {fileID: 1903519479}
+  - {fileID: 1686557150}
   slots:
   - {fileID: 1694869227}
   - {fileID: 1576452874}
@@ -2029,9 +2103,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectionOutlines:
-  - {fileID: 48701264}
-  - {fileID: 1903519479}
-  - {fileID: 1686557150}
+  - {fileID: 1259218830}
+  - {fileID: 1919715718}
+  - {fileID: 1429491861}
   slots:
   - {fileID: 1694869227}
   - {fileID: 1576452874}
@@ -2058,6 +2132,8 @@ MonoBehaviour:
   quickSelection: {fileID: 1987374349}
   strongSelection: {fileID: 1987374351}
   settings: {fileID: 11400000, guid: 99fed084a0e75e44baa5422da41ae816, type: 2}
+  strongTimerImage: {fileID: 888458014}
+  fastTimerImage: {fileID: 624490238}
 --- !u!1 &2095687546
 GameObject:
   m_ObjectHideFlags: 0
