@@ -11,6 +11,9 @@ public class Slot : MonoBehaviour
 
     [SerializeField] ArrowIndicator upIndicator;
     [SerializeField] ArrowIndicator downIndicator;
+    [SerializeField] GameObject fastIndicator;
+
+    float fastIndicatorY;
 
     public float MinY { get; private set; } = .0f;
 
@@ -19,8 +22,15 @@ public class Slot : MonoBehaviour
         Up = 1,
         Down = -1
     }
+
+    void Start()
+    {
+        fastIndicatorY = fastIndicator.transform.position.y;
+    }
+
     void Update()
     {
+
         Vector3 down = Vector3.down * strongArrows * settings.strongArrowWeight;
         Vector3 up = Vector3.up * quickArrows * settings.quickArrowWeight; 
         transform.Translate((up + down) * settings.slotSpeed * Time.deltaTime);
@@ -28,6 +38,12 @@ public class Slot : MonoBehaviour
 
         float y = transform.position.y;
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(y, -Camera.main.orthographicSize, Camera.main.orthographicSize), transform.position.z);
+
+        if (y > fastIndicatorY)
+        {
+            fastIndicator.transform.position = new Vector3 (fastIndicator.transform.position.x, y, fastIndicator.transform.position.z);
+            fastIndicatorY = y;
+        }
     }
 
     public void AddQuickArrow() 

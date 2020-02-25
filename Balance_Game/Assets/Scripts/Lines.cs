@@ -23,8 +23,8 @@ public class Lines : MonoBehaviour
 
 
             lineRenderer.useWorldSpace = true;
-            lineRenderer.SetPosition(0, new Vector3(-10.0f, y, .0f));
-            lineRenderer.SetPosition(1, new Vector3(10.0f, y, .0f));
+            lineRenderer.SetPosition(0, new Vector3(-7.0f, y, .0f));
+            lineRenderer.SetPosition(1, new Vector3(7.0f, y, .0f));
             lineRenderer.startColor = lineColor;
             lineRenderer.endColor = lineColor;
         }
