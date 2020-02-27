@@ -17,6 +17,8 @@ public class GameController : MonoBehaviour
     [Header("UI")]
     [SerializeField] Image strongTimerImage;
     [SerializeField] Image fastTimerImage;
+    [SerializeField] Text strongPlayerScore;
+    [SerializeField] Text weakPlayerScore;
 
     Timer quickTimer = null;
     Timer strongTimer = null;
@@ -56,9 +58,9 @@ public class GameController : MonoBehaviour
 
         for(int i = 0; i < slots.Length; i++) 
         {
-            //todo : communicate this to a game controller-like object
             if (slots[i].transform.position.y > settings.strongArrowGoalY)
             {
+                strongPlayerScore.text = "1/1";
                 Debug.Log("STRONG PLAYER WON");
             }
 
@@ -67,7 +69,8 @@ public class GameController : MonoBehaviour
             if (slotPoints > lastSlotPoints[i]) 
             {
                 quickPoints += slotPoints - lastSlotPoints[i];
-                if(quickPoints >= settings.weakArrowPointGoal)
+                weakPlayerScore.text = (Mathf.Clamp(quickPoints, 0, 3)).ToString() + "/3";
+                if (quickPoints >= settings.weakArrowPointGoal)
                 {
                     Debug.Log("QUICK PLAYER WON");
                 }

@@ -9,17 +9,18 @@ public class Lines : MonoBehaviour
 
     [SerializeField] float startY;
     [SerializeField] float endY;
+    [SerializeField] int lineNumber = 10;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        for(int i = 0; i < 10; i++) 
+        for(int i = 0; i < lineNumber; i++) 
         {
             var currentLine = Instantiate(linePrefab);
             var lineRenderer = currentLine.GetComponent<LineRenderer>();
 
-            float y = startY + (i/10.0f)*(endY-startY);
+            float y = startY + (i/(float)lineNumber)*(endY-startY);
 
 
             lineRenderer.useWorldSpace = true;

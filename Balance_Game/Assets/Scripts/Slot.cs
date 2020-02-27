@@ -15,7 +15,7 @@ public class Slot : MonoBehaviour
 
     float fastIndicatorY;
 
-    public float MinY { get; private set; } = .0f;
+    public float MaxY { get; private set; } = .0f;
 
     public enum Direction : int
     {
@@ -34,7 +34,7 @@ public class Slot : MonoBehaviour
         Vector3 down = Vector3.down * strongArrows * settings.strongArrowWeight;
         Vector3 up = Vector3.up * quickArrows * settings.quickArrowWeight; 
         transform.Translate((up + down) * settings.slotSpeed * Time.deltaTime);
-        MinY = Mathf.Min(transform.position.y, MinY);
+        MaxY = Mathf.Max(transform.position.y, MaxY);
 
         float y = transform.position.y;
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(y, -Camera.main.orthographicSize, Camera.main.orthographicSize), transform.position.z);
@@ -62,9 +62,9 @@ public class Slot : MonoBehaviour
     { 
         get
         {
-            if (MinY <= settings.weakArrowThirdPointY) return 3;
-            if (MinY <= settings.weakArrowSecondPointY) return 2;
-            if (MinY <= settings.weakArrowFirstPointY) return 1;
+            if (MaxY >= settings.weakArrowThirdPointY) return 3;
+            if (MaxY >= settings.weakArrowSecondPointY) return 2;
+            if (MaxY >= settings.weakArrowFirstPointY) return 1;
             return 0; 
         } 
     }
