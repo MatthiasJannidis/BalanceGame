@@ -17,8 +17,8 @@ MonoBehaviour:
   strongArrowPlaceTimer: 2
   strongArrowGoalY: 5
   weakArrowPointGoal: 4
-  weakArrowFirstPointY: -0.4
-  weakArrowSecondPointY: -1
-  weakArrowThirdPointY: -2
+  weakArrowFirstPointY: 1
+  weakArrowSecondPointY: 2
+  weakArrowThirdPointY: 3
   quickArrowWeight: 0.6
   strongArrowWeight: 1.2
