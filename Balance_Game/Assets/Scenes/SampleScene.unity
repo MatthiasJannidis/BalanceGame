@@ -2146,8 +2146,8 @@ MonoBehaviour:
   lineColor: {r: 0.5943396, g: 0.5943396, b: 0.5943396, a: 1}
   linePrefab: {fileID: 3916371573273136702, guid: fe58e7e23d11c1140abb5c70f08a77b5,
     type: 3}
-  startY: -5
-  endY: 5
+  endY: -5
+  lineNumber: 10
 --- !u!4 &1685786477
 Transform:
   m_ObjectHideFlags: 0
