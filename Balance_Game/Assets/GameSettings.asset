@@ -21,4 +21,4 @@ MonoBehaviour:
   weakArrowSecondPointY: 2
   weakArrowThirdPointY: 3
   quickArrowWeight: 0.6
-  strongArrowWeight: 1.2
+  strongArrowWeight: 2

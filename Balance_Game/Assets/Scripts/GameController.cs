@@ -14,16 +14,28 @@ public class GameController : MonoBehaviour
     [SerializeField] GameSettings settings;
 
 
+
+
     [Header("UI")]
     [SerializeField] Image strongTimerImage;
     [SerializeField] Image fastTimerImage;
     [SerializeField] Text strongPlayerScore;
     [SerializeField] Text weakPlayerScore;
 
+
+    [Header("Sound")]
+    [SerializeField] AudioSource strongSource;
+    [SerializeField] AudioSource fastSource;
+    [SerializeField] AudioClip fastPointSound;
+    [SerializeField] AudioClip strongWinSound;
+
     Timer quickTimer = null;
     Timer strongTimer = null;
     int[] lastSlotPoints;
     int quickPoints = 0;
+
+    bool strongWon = false;
+
 
     void Start()
     {
@@ -60,6 +72,11 @@ public class GameController : MonoBehaviour
         {
             if (slots[i].transform.position.y > settings.strongArrowGoalY)
             {
+                if (strongWon == false)
+                {
+                    strongSource.PlayOneShot(strongWinSound);
+                    strongWon = true;
+                }
                 strongPlayerScore.text = "1/1";
                 Debug.Log("STRONG PLAYER WON");
             }
@@ -69,6 +86,7 @@ public class GameController : MonoBehaviour
             if (slotPoints > lastSlotPoints[i]) 
             {
                 quickPoints += slotPoints - lastSlotPoints[i];
+                fastSource.PlayOneShot(fastPointSound);
                 weakPlayerScore.text = (Mathf.Clamp(quickPoints, 0, 3)).ToString() + "/3";
                 if (quickPoints >= settings.weakArrowPointGoal)
                 {
